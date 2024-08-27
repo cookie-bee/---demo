@@ -7,6 +7,7 @@ import {TimelyAir} from  '../bean/TimelyAir/TimelyAir'
 @Component
 export struct TimelyWeatherComponent {
 
+  private locationId: string ='101010100'
 
   @State cityTimelyWeather: TimelyWeather = new TimelyWeather()
 
@@ -35,16 +36,16 @@ export struct TimelyWeatherComponent {
   //初始化方法
   async  initDate(){
 
-    let result1: TimelyWeather = await getweatherUtil.getTimelyWeather_1()
+    let result1: TimelyWeather = await getweatherUtil.getTimelyWeather_1(this.locationId)
     this.cityTimelyWeather = result1
     this.citytemp = result1.now.temp
     this.WeatherNow = result1.now.text
 
-    let result2: DailyWeather = await getweatherUtil.getDailyWeather_1()
+    let result2: DailyWeather = await getweatherUtil.getDailyWeather_1(this.locationId)
     this.cityDailyWeather = result2
     this.today = result2.daily
 
-    let result3: TimelyAir = await getweatherUtil.getTimelyAir_1()
+    let result3: TimelyAir = await getweatherUtil.getTimelyAir_1(this.locationId)
     this.timelyAir = result3
     this.AirNow = result3.now.category
 

@@ -4,6 +4,8 @@ import getweatherUtil from '../Util/getWeatherUtil'
 @Component
 export struct AqiCircleComponent {
 
+  private locationId: string = '101010100'
+
   @State timelyAir: TimelyAir = new TimelyAir()
 
   @State aqi: number = Number(this.timelyAir.now.aqi)
@@ -15,7 +17,7 @@ export struct AqiCircleComponent {
   //初始化方法
   async initDate() {
 
-    let result1: TimelyAir = await getweatherUtil.getTimelyAir_1()
+    let result1: TimelyAir = await getweatherUtil.getTimelyAir_1(this.locationId)
     this.timelyAir = result1
     this.aqi = Number(this.timelyAir.now.aqi)
     console.log("aqi_test"+ this.aqi);

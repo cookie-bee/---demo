@@ -4,6 +4,9 @@ import getweatherUtil from '../Util/getWeatherUtil'
 
 @Component
 export struct FutureDailyWeather {
+
+  private locationId: string = '101010100'
+
   @State FutureWeather: DailyWeather = new DailyWeather()
   @State FutureWeatherData: Array<daily> = []
 
@@ -14,7 +17,7 @@ export struct FutureDailyWeather {
   //初始化方法
   async initDate() {
 
-    let result1: DailyWeather = await getweatherUtil.getDailyWeather_1()
+    let result1: DailyWeather = await getweatherUtil.getDailyWeather_1(this.locationId)
     this.FutureWeather = result1
     this.FutureWeatherData = result1.daily
     console.log("Date_test"+this.FutureWeatherData[0].fxDate)

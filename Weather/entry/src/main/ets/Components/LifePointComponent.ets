@@ -5,6 +5,8 @@ import {daily} from '../bean/WeatherPoint/daily'
 @Component
 export struct LifePointComponent {
 
+  private locationId: string = '101010100'
+
   @State Point_Data : WeatherPoint = new WeatherPoint()
 
   @State daily_point : Array<daily> = []
@@ -18,7 +20,7 @@ export struct LifePointComponent {
   //初始化方法
   async  initDate(){
 
-    let result1: WeatherPoint = await getweatherUtil.getWeatherPoint_1()
+    let result1: WeatherPoint = await getweatherUtil.getWeatherPoint_1(this.locationId)
     this.Point_Data = result1
     this.daily_point = result1.daily
 

@@ -6,6 +6,8 @@ import { EditableTitleBar } from '@ohos.arkui.advanced.EditableTitleBar'
 @Component
 export struct HourlyWeatherComponent {
 
+  private locationId : string = '101010100'
+
   @State hourlyWeather: HourlyWeather = new HourlyWeather()
 
   @State hourly_weather: Array<hourly> = []
@@ -18,7 +20,7 @@ export struct HourlyWeatherComponent {
   //初始化方法
   async  initDate(){
 
-    let result1: HourlyWeather = await getweatherUtil.getHourlyWeather_1()
+    let result1: HourlyWeather = await getweatherUtil.getHourlyWeather_1(this.locationId)
     this.hourlyWeather = result1
     this.hourly_weather = result1.hourly
 
@@ -119,6 +121,6 @@ export struct HourlyWeatherComponent {
   .height("15%")
   .backgroundColor('rgba(255, 255, 255, 0.1)')
   .borderRadius(20)
-  .margin({top:20})
+  .margin({top:15})
   }
 }
