@@ -231,6 +231,24 @@ async getCityMessage_id_1(locationId: string ): Promise<CitySearch>
     return weatherModel
 
   }
+
+//发送多个url来获取多个城市数据
+async getCityMessage_id_2(locationIdList: Array<string>){
+  let promises :Array<Promise<CitySearch>> = []
+  let CityMessageList :Array<CitySearch> = []
+  for(let i = 0;i < locationIdList.length; i++)
+  {
+    promises.push(this.getCityMessage_id(locationIdList[i]))
+  }
+
+  await Promise.all(promises).then(result=>{
+    for(const element of result) {
+      console.log(element.location[0].name)
+    }
+    CityMessageList = result
+  })
+  return CityMessageList
+}
 }
 
 

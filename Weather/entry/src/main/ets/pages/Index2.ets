@@ -23,9 +23,24 @@ struct Index2 {
   @State locationId: string = '101010100'
   @State cityMessage: CitySearch = new CitySearch()
   @State locationIdList: string[] = ['101010100','101010200']
+  @State cityNameList: string[] = ['北京','海淀']
+
+  onPageShow(): void {
+
+    let record = router.getParams() as Record<string , string[]>
+    if(record){
+      this.locationIdList = record['locationId']
+      this.cityNameList = record['cityName']
+    }
+
+  }
+
+
+
 
   aboutToAppear(): void {
     this.initDate()
+
   }
 
   //初始化方法
@@ -66,9 +81,25 @@ struct Index2 {
                   router.pushUrl({
                     url:'pages/AddCity',
                     params:{
-                      locationId: this.locationIdList
+                      locationId: this.locationIdList,
+                      cityName: this.cityNameList
                     }
                   })
+                }
+              },
+              {
+                value:"管理城市",
+                action: () => {
+                  router.pushUrl({
+                    url:'pages/CityManage'
+                  })
+
+                }
+              },
+              {
+                value: "测试工具",
+                action: () => {
+                  getweatherUtil.getCityMessage_id_2(this.locationIdList)
                 }
               }
             ])
@@ -89,8 +120,6 @@ struct Index2 {
 
           })
         }
-
-
 
         }
 
