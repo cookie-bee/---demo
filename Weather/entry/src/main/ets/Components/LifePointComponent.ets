@@ -26,6 +26,90 @@ export struct LifePointComponent {
 
   }
 
+  @Builder
+  LifePointImage(keyWord:string){
+
+    if (keyWord === '运动指数') {
+      Image($r("app.media.yundongzhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '洗车指数') {
+      Image($r("app.media.maps_local_car_wash"))
+        .width(30)
+    }
+
+    if (keyWord === '穿衣指数') {
+      Image($r("app.media.chuanyizhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '钓鱼指数') {
+      Image($r("app.media.diaoyuzhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '紫外线指数') {
+      Image($r("app.media.ziwaixianzhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '旅游指数') {
+      Image($r("app.media.lvyouzhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '过敏指数') {
+      Image($r("app.media.guominzhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '舒适度指数') {
+      Image($r("app.media.shushiduzhishu_xian"))
+        .width(30)
+    }
+
+    if (keyWord === '感冒指数') {
+      Image($r("app.media.ganmaozhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '空气污染扩散条件指数') {
+      Image($r("app.media.u_105"))
+        .width(30)
+    }
+
+    if (keyWord === '空调开启指数') {
+      Image($r("app.media.airconditioner"))
+        .width(30)
+    }
+
+    if (keyWord === '太阳镜指数') {
+      Image($r("app.media.glass"))
+        .width(30)
+    }
+
+    if (keyWord === '化妆指数') {
+      Image($r("app.media.fenleiweidianji"))
+        .width(30)
+    }
+
+    if (keyWord === '晾晒指数') {
+      Image($r("app.media.liangshaizhishu"))
+        .width(30)
+    }
+
+    if (keyWord === '交通指数') {
+      Image($r("app.media.check"))
+        .width(30)
+    }
+
+    if (keyWord === '防晒指数') {
+      Image($r("app.media.BeachUmbrella"))
+        .width(30)
+    }
+  }
+
   build() {
     Column({space:20}){
 
@@ -40,10 +124,9 @@ export struct LifePointComponent {
       List({space:5}){
         ForEach(this.daily_point,(point:daily)=>{
           ListItem(){
-            Column({space:30}){
+            Column({space:20}){
 
-              Image($r('app.media.tianqi_xuezhuanqing'))
-                .width(30)
+              this.LifePointImage(point.name)
 
               Text(point.category)
                 .fontSize(20)

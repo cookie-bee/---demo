@@ -10,7 +10,9 @@ import {MainTemComponent} from './MainTemComponent'
 import {CitySearch} from '../bean/CitySearch/CitySearch'
 import {CityName} from './CityName'
 import { router } from '@kit.ArkUI'
-
+import {CityBlock} from '../Components/CityManageComponent/CityBlock'
+import {EmptyComponent} from '../Components/EmptyComponent'
+import {WeatherPointComponent} from '../Components/WeatherPointComponent'
 
 @Component
 export struct AllComponent {
@@ -70,15 +72,16 @@ export struct AllComponent {
 
         LifePointComponent({locationId: this.locationId})
 
+        WeatherPointComponent({locationId: this.locationId})
+
+        EmptyComponent()
 
         }
-
-
       }
     .scrollable(ScrollDirection.Vertical)
-    .scrollBarColor("rgba(0,0,0,0.5)")
+    .scrollBarColor("rgba(255,255,255,0.5)")
     .scrollBar(BarState.Auto)
-      .backgroundColor("#8aacef")
+    .backgroundColor("#8aacef")
     .height("100%")
     }
   }

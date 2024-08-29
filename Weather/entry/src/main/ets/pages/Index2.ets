@@ -91,7 +91,11 @@ struct Index2 {
                 value:"管理城市",
                 action: () => {
                   router.pushUrl({
-                    url:'pages/CityManage'
+                    url:'pages/CityManage',
+                    params:{
+                      locationId: this.locationIdList,
+                      cityName: this.cityNameList
+                    }
                   })
 
                 }
