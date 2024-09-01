@@ -29,7 +29,7 @@ export struct WeatherPointComponent {
         .fontColor(Color.White)
         .opacity(0.5)
         .width("100%")
-        .margin({ top: 20, left: 30 })
+        .margin({ top: 20, left: 30, bottom:5 })
 
       List({space:10}) {
         ListItem() {
@@ -174,6 +174,7 @@ export struct WeatherPointComponent {
       }
       .listDirection(Axis.Horizontal)
       .width("92%")
+      .height("70%")
     }
     .width("95%")
     .height("30%")

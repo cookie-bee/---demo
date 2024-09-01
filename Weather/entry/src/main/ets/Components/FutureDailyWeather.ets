@@ -56,7 +56,7 @@ export struct FutureDailyWeather {
     let month = (date.getMonth() + 1).toString().padStart(2, '0');
     let day = date.getDate().toString().padStart(2, '0');
 
-    // 组合成所需的日期格式，例如：2024-08-07
+    // 组合成所需的日期格式
     return `${month}/${day}`;
   }
 
@@ -99,7 +99,9 @@ export struct FutureDailyWeather {
               .fontColor(Color.White)
               .opacity(0.5)
               .margin({bottom:15})
+
             this.weatherImage(Daily.textDay,30)
+
             Text(Daily.tempMax.toString()+"°C")
               .fontSize(20)
               .fontColor(Color.White)

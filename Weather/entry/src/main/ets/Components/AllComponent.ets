@@ -13,6 +13,7 @@ import { router } from '@kit.ArkUI'
 import {CityBlock} from '../Components/CityManageComponent/CityBlock'
 import {EmptyComponent} from '../Components/EmptyComponent'
 import {WeatherPointComponent} from '../Components/WeatherPointComponent'
+import {NewFutureDailyWeather} from '../Components/NewFutureDailyWeather'
 
 @Component
 export struct AllComponent {
@@ -74,6 +75,8 @@ export struct AllComponent {
 
         WeatherPointComponent({locationId: this.locationId})
 
+        NewFutureDailyWeather({locationId: this.locationId})
+
         EmptyComponent()
 
         }
@@ -81,7 +84,7 @@ export struct AllComponent {
     .scrollable(ScrollDirection.Vertical)
     .scrollBarColor("rgba(255,255,255,0.5)")
     .scrollBar(BarState.Auto)
-    .backgroundColor("#8aacef")
+    .backgroundColor("#65aef3")
     .height("100%")
     }
   }

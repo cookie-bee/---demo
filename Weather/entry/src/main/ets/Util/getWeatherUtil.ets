@@ -5,6 +5,7 @@ import {TimelyAir} from  '../bean/TimelyAir/TimelyAir'
 import {HourlyWeather} from  '../bean/HourlyWeather/HourlyWeather'
 import {WeatherPoint} from '../bean/WeatherPoint/WeatherPoint'
 import {CitySearch} from '../bean/CitySearch/CitySearch'
+import {SunRiseSet} from '../bean/SunRiseSet/SunRiseSet'
 
 export class getWeatherUtil{
 
@@ -249,6 +250,56 @@ async getCityMessage_id_2(locationIdList: Array<string>){
   })
   return CityMessageList
 }
+
+//获取当天时间
+getTodayDate() {
+  let date = new Date()
+  let year = date.getFullYear();
+  let month = (date.getMonth() + 1).toString().padStart(2, '0');
+  let day = date.getDate().toString().padStart(2, '0');
+
+  let formattedDate = `${year}${month}${day}`
+  return formattedDate
+}
+
+getSunMessage(locationId: string) {
+    return new Promise<SunRiseSet>((resolve, reject) => {
+
+      let request = http.createHttp()
+
+      let Date = this.getTodayDate
+
+      request.request(`https://devapi.qweather.com/v7/astronomy/sun?location=${locationId}}&date=${Date}&key=16d8d9c11a9848d1be949b4f440c3611&gzip=n`,
+        {
+          method: http.RequestMethod.GET
+        }
+      )
+        .then(res => {
+          if (res.responseCode === 200) {
+            console.log('testCity', res.result)
+            resolve(JSON.parse(res.result.toString()))
+          } else {
+            console.log('查询失败5,', JSON.stringify(res.result))
+            reject('失败5')
+          }
+        })
+        .catch((err: Error) => {
+          console.log('查询失败6,', JSON.stringify(err))
+          reject('失败6')
+        })
+    })
+}
+
+//获取单个城市日升日落信息
+async getSunMessage_1(locationId: string ): Promise<SunRiseSet>
+{
+
+    const weatherModel = await this.getSunMessage(locationId)
+    console.log(weatherModel.code)
+    return weatherModel
+
+}
+
 }
 
 

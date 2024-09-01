@@ -61,7 +61,7 @@ export struct AqiComponent {
 
     }
     .width("95%")
-    .height("23%")
+    .height("25%")
     .backgroundColor('rgba(255, 255, 255, 0.1)')
     .borderRadius(20)
     .margin({top:20})

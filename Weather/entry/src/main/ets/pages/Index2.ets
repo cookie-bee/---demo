@@ -132,7 +132,7 @@ struct Index2 {
     .scrollable(ScrollDirection.Vertical)
     .scrollBarColor("rgba(0,0,0,0.5)")
     .scrollBar(BarState.Auto)
-      .backgroundColor("#8aacef")
+      .backgroundColor("#65aef3")
     .height("100%")
     }
   }

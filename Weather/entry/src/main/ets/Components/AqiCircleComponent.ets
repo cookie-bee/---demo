@@ -33,6 +33,8 @@ export struct AqiCircleComponent {
           .endAngle(150)
           .colors([[0X00FF00, 0.1],[0xFFFF00,0.1],[0xFF6100,0.1],[0xFF0000,0.1],[0xA020F0,0.2],[0x8B0000,0.4]])
           .strokeWidth(5)
+          .description(null)
+          .trackShadow(null)
 
         Column(){
           Text(this.timelyAir.now.category)

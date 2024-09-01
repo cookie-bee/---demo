@@ -149,11 +149,12 @@ export struct LifePointComponent {
       }
       .listDirection(Axis.Horizontal)
       .width("92%")
+      .height("70%")
 
 
     }
     .width("95%")
-    .height("40%")
+    .height("30%")
     .backgroundColor('rgba(255, 255, 255, 0.1)')
     .borderRadius(20)
     .margin({top:20})

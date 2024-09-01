@@ -121,6 +121,6 @@ export struct HourlyWeatherComponent {
   .height("15%")
   .backgroundColor('rgba(255, 255, 255, 0.1)')
   .borderRadius(20)
-  .margin({top:15})
+  .margin({top:10})
   }
 }
