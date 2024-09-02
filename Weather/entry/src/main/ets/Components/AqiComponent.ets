@@ -42,7 +42,7 @@ export struct AqiComponent {
 
         Column({space:5}){
           Text("当前AQI指数为"+this.aqi)
-            .fontSize(15)
+            .fontSize(20)
             .fontColor(Color.White)
 
             Text("测试文本")

@@ -12,6 +12,7 @@ import {CityName} from '../Components/CityName'
 import { router } from '@kit.ArkUI'
 import {AllComponent} from '../Components/AllComponent'
 
+
 @Entry
 @Component
 struct Index2 {
@@ -66,6 +67,11 @@ struct Index2 {
       console.log("失败")
 
 
+  }
+
+  async saveCityInfo(cityname: string, locationId: string) {
+
+  
   }
 
   build() {

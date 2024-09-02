@@ -116,7 +116,7 @@ export struct NewFutureDailyWeather {
            Scroll(){
              Canvas(this.context)
                .width(this.tempMax.length * this.itemWidth + this.itemWidth + this.sideMargin * 2)
-               .height("80%")
+               .height("85%")
                .onReady(()=>{
                  //找出高温曲线的最大值和低温曲线的最小值
                  const maxTemp: number = Math.max(...this.tempMax)
@@ -128,9 +128,8 @@ export struct NewFutureDailyWeather {
                  //设置线条配置
                  this.context.lineWidth = 2
                  this.context.font = '13vp sans-serif'
-                 this.context.fillStyle = '#ffffff'
-                 this.context.strokeStyle = '#ffffff'
-                 this.context.globalAlpha = 1
+                 this.context.fillStyle = 'rgba(255,255,255,0.6)'
+                 this.context.strokeStyle = 'rgba(255,255,255,0.5)'
                  this.context.textAlign = 'start'
 
                  //设置x坐标
@@ -157,10 +156,10 @@ export struct NewFutureDailyWeather {
                    this.context.fill(region)
 
                    //绘制日期
-                   this.context.fillStyle = "rgba(255,255,255,0.5)"
+                   this.context.fillStyle = "rgba(255,255,255,0.6)"
                    this.context.font = '60px Arial'
                    let dateStr: string = this.weatherDates[i]
-                   this.context.fillText(dateStr,x - this.context.measureText(dateStr).width / 2,20)
+                   this.context.fillText(dateStr,x - this.context.measureText(dateStr).width / 2,15)
 
                    //绘制天气图标
                    let iconUrl: string = this.weatherUrl(this.weatherConditions[i])
@@ -168,11 +167,14 @@ export struct NewFutureDailyWeather {
                    this.context.drawImage(imgIcon, x - this.context.measureText(dateStr).width/2+10,30,30,35)
 
                    //绘制天气状态
+                   this.context.fillStyle = "white"
+                   this.context.font = '55px Arial'
                    let highConditionStr: string = this.weatherConditions[i]
                    this.context.fillText(highConditionStr, x-this.context.measureText(highConditionStr).width/2,90)
 
                    //绘制高温低温的文字
                    this.context.fillStyle = "white"
+                   this.context.font = '55px Arial'
                    let maxTemperatureStr: string = `${this.tempMax[i]}℃`
                    let minTemperatureStr: string = `${this.tempMin[i]}℃`
                    this.context.fillText(maxTemperatureStr, x-this.context.measureText(maxTemperatureStr).width/2,yHeight-8)
@@ -181,6 +183,7 @@ export struct NewFutureDailyWeather {
                  }
 
                  //绘制高温曲线
+                 this.context.fillStyle = "rgba(255,255,255,0.5)"
                  this.context.beginPath()
                  this.context.moveTo(xPos[0],tempMaxPos[0])
                  for(let i: number=1;i<xPos.length;i++){
@@ -206,7 +209,7 @@ export struct NewFutureDailyWeather {
            .scrollBar(BarState.Off)
          }
          .width("95%")
-         .height("45%")
+         .height("50%")
          .backgroundColor('rgba(255, 255, 255, 0.1)')
          .borderRadius(20)
          .margin({top:20})

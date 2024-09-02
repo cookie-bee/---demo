@@ -76,7 +76,7 @@ export struct CityBlock {
       }
     }
     .padding({top:10,bottom:10,left:15,right:15})
-    .width("90%")
+    .width("87%")
     .height("20%")
     .backgroundColor("#65aef3")
     .borderRadius(20)

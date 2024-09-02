@@ -26,12 +26,7 @@ struct AddCity {
 
     console.log("使用了2")
     let result2: Array<CitySearch> = await getweatherUtil.getCityMessage_id_2(this.AllLocationId)
-    for (let i = 0; i < result2.length; i++) {
 
-      this.AllCityNameList[i] = result2[i].location[0].name
-      console.log("测试3"+this.AllCityNameList[i])
-
-    }
   }
 
   build() {
@@ -52,7 +47,7 @@ struct AddCity {
               url:"pages/Index2",
               params:{
                 locationId: this.locationIdList,
-                cityName: this.cityNameList
+
               }
             })
           })

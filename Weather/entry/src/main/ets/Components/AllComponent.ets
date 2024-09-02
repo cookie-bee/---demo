@@ -14,6 +14,7 @@ import {CityBlock} from '../Components/CityManageComponent/CityBlock'
 import {EmptyComponent} from '../Components/EmptyComponent'
 import {WeatherPointComponent} from '../Components/WeatherPointComponent'
 import {NewFutureDailyWeather} from '../Components/NewFutureDailyWeather'
+import { WindMessageComponent } from './WindMessageComponent'
 
 @Component
 export struct AllComponent {
@@ -67,7 +68,7 @@ export struct AllComponent {
 
         HourlyWeatherComponent({locationId: this.locationId})
 
-        FutureDailyWeather({locationId: this.locationId})
+        NewFutureDailyWeather({locationId: this.locationId})
 
         AqiComponent({locationId: this.locationId})
 
@@ -75,7 +76,7 @@ export struct AllComponent {
 
         WeatherPointComponent({locationId: this.locationId})
 
-        NewFutureDailyWeather({locationId: this.locationId})
+        WindMessageComponent({locationId: this.locationId})
 
         EmptyComponent()
 

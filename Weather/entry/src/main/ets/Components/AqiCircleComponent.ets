@@ -38,12 +38,13 @@ export struct AqiCircleComponent {
 
         Column(){
           Text(this.timelyAir.now.category)
-            .fontSize(25)
+            .fontSize(35)
             .fontColor(Color.White)
+            .fontWeight(FontWeight.Medium)
 
 
           Text(this.timelyAir.now.aqi)
-            .fontSize(15)
+            .fontSize(20)
             .fontColor(Color.White)
         }
 
