@@ -2,6 +2,7 @@
   "src": [
     "pages/Index2",
     "pages/AddCity",
-    "pages/CityManage"
+    "pages/CityManage",
+    "pages/NewAddCity"
   ]
 }

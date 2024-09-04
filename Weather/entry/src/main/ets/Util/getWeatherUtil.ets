@@ -6,6 +6,7 @@ import {HourlyWeather} from  '../bean/HourlyWeather/HourlyWeather'
 import {WeatherPoint} from '../bean/WeatherPoint/WeatherPoint'
 import {CitySearch} from '../bean/CitySearch/CitySearch'
 import {SunRiseSet} from '../bean/SunRiseSet/SunRiseSet'
+import {HotCity} from '../bean/HotCity/HotCity'
 
 export class getWeatherUtil{
 
@@ -295,6 +296,42 @@ async getSunMessage_1(locationId: string ): Promise<SunRiseSet>
 {
 
     const weatherModel = await this.getSunMessage(locationId)
+    console.log(weatherModel.code)
+    return weatherModel
+
+}
+
+getHotCityMessage(locationId: string)
+{
+    return new Promise<HotCity>((resolve, reject) => {
+
+      let request = http.createHttp()
+
+      request.request(`https://geoapi.qweather.com/v2/city/top?number=15&range=cn&key=16d8d9c11a9848d1be949b4f440c3611&gzip=n`,
+        {
+          method: http.RequestMethod.GET
+        }
+      )
+        .then(res => {
+          if (res.responseCode === 200) {
+            console.log('testCity', res.result)
+            resolve(JSON.parse(res.result.toString()))
+          } else {
+            console.log('查询失败5,', JSON.stringify(res.result))
+            reject('失败5')
+          }
+        })
+        .catch((err: Error) => {
+          console.log('查询失败6,', JSON.stringify(err))
+          reject('失败6')
+        })
+    })
+}
+
+async getHotCityMessage_1(locationId: string ): Promise<HotCity>
+{
+
+    const weatherModel = await this.getHotCityMessage(locationId)
     console.log(weatherModel.code)
     return weatherModel
 

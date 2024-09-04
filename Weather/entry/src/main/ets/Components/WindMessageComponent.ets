@@ -28,7 +28,7 @@ export struct WindMessageComponent {
 
   build() {
     Column(){
-      Text("多日预报")
+      Text("风向风力")
         .textAlign(TextAlign.Start)
         .fontSize(15)
         .fontColor(Color.White)

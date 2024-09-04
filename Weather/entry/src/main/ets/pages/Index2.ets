@@ -71,7 +71,7 @@ struct Index2 {
 
   async saveCityInfo(cityname: string, locationId: string) {
 
-  
+
   }
 
   build() {
@@ -85,7 +85,7 @@ struct Index2 {
                 value:"添加城市",
                 action: () => {
                   router.pushUrl({
-                    url:'pages/AddCity',
+                    url:'pages/NewAddCity',
                     params:{
                       locationId: this.locationIdList,
                       cityName: this.cityNameList

@@ -15,6 +15,7 @@ import {EmptyComponent} from '../Components/EmptyComponent'
 import {WeatherPointComponent} from '../Components/WeatherPointComponent'
 import {NewFutureDailyWeather} from '../Components/NewFutureDailyWeather'
 import { WindMessageComponent } from './WindMessageComponent'
+import { HotCityComponent } from './HotCityComponent'
 
 @Component
 export struct AllComponent {
@@ -77,6 +78,8 @@ export struct AllComponent {
         WeatherPointComponent({locationId: this.locationId})
 
         WindMessageComponent({locationId: this.locationId})
+
+        HotCityComponent({locationId: this.locationId})
 
         EmptyComponent()
 
