@@ -1,13 +1,18 @@
 import {HotCity} from '../bean/HotCity/HotCity'
 import getweatherUtil from '../Util/getWeatherUtil'
 import {topCityList} from '../bean/HotCity/topCityList'
+import router from '@ohos.router';
 
 @Component
 export struct HotCityComponent {
 
   private locationId: string = '101010100'
 
-  @State hotCityMessage: HotCity = new HotCity()
+  private locationIdList: string[] = []
+
+  private cityNameList: string[] = []
+
+    @State hotCityMessage: HotCity = new HotCity()
 
   @State hotCityList: Array<topCityList> = []
 
@@ -49,6 +54,17 @@ export struct HotCityComponent {
             .borderRadius(20)
             .backgroundColor("rgba(255,255,255,0.2)")
             .justifyContent(FlexAlign.Center)
+            .onClick(()=>{
+              router.pushUrl({
+                url:'pages/NewCityPage',
+                params: {
+                  locationId: this.locationIdList,
+                  cityName: this.cityNameList,
+                  addLocationId: city.id,
+                  addLocationName: city.name
+                }
+              })
+            })
           }
           .width("95%")
           .height(40)

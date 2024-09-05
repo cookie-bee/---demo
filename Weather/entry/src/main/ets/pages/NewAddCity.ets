@@ -42,7 +42,7 @@ struct NewAddCity {
 
       Stack({alignContent:Alignment.Top}){
         Column(){
-          HotCityComponent()
+          HotCityComponent({locationIdList: this.locationIdList,cityNameList: this.cityNameList})
             .margin({top:100})
         }
 
@@ -52,7 +52,7 @@ struct NewAddCity {
               .onClick(() => {
                 router.back()
               })
-              .width(10)
+              .width(20)
             TextInput({ placeholder: "搜索城市（中文/拼音）" })
               .onChange(async (value) => {
                 this.SearchText = value
@@ -77,6 +77,17 @@ struct NewAddCity {
                 }.width("90%")
                 .alignItems(HorizontalAlign.Start)
                 .margin({ top: 10, bottom: 10 })
+                .onClick(()=>{
+                  router.pushUrl({
+                    url:'pages/NewCityPage',
+                    params: {
+                      locationId: this.locationIdList,
+                      cityName: this.cityNameList,
+                      addLocationId: city.id,
+                      addLocationName: city.name
+                    }
+                  })
+                })
 
               }
               .width("100%")

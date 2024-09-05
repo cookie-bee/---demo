@@ -79,8 +79,6 @@ export struct AllComponent {
 
         WindMessageComponent({locationId: this.locationId})
 
-        HotCityComponent({locationId: this.locationId})
-
         EmptyComponent()
 
         }
