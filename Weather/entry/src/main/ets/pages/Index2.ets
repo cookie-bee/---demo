@@ -11,6 +11,7 @@ import {CitySearch} from '../bean/CitySearch/CitySearch'
 import {CityName} from '../Components/CityName'
 import { router } from '@kit.ArkUI'
 import {AllComponent} from '../Components/AllComponent'
+import PreferencesUtil from '../Util/PreferenceUtil'
 
 
 @Entry
@@ -28,11 +29,15 @@ struct Index2 {
 
   onPageShow(): void {
 
-    let record = router.getParams() as Record<string , string[]>
-    if(record){
-      this.locationIdList = record['locationId']
-      this.cityNameList = record['cityName']
-    }
+    PreferencesUtil.getCityName().then((value)=>{
+      this.cityNameList = value
+      console.log("测试首选项")
+    })
+
+    PreferencesUtil.getLocationId().then((value)=>{
+      this.locationIdList = value
+    })
+
 
   }
 
@@ -41,30 +46,28 @@ struct Index2 {
 
   aboutToAppear(): void {
     this.initDate()
+    PreferencesUtil.getCityName().then((value)=>{
+      this.cityNameList = value
+      console.log("测试首选项")
+    })
+
+    PreferencesUtil.getLocationId().then((value)=>{
+      this.locationIdList = value
+    })
 
   }
 
   //初始化方法
   async initDate() {
 
-    let result1: TimelyWeather = await getweatherUtil.getTimelyWeather_1(this.locationId)
-    let result2: CitySearch = await getweatherUtil.getCityMessage_id_1(this.locationId)
-    this.cityName = result2.location[0].name
-    this.cityTimelyWeather = result1
-    this.citytemp = result1.now.temp
-    if(this.citytemp!== '')
-    {
-      console.log("测试"+this.citytemp)
-    }
-    else
-      console.log("失败")
+    PreferencesUtil.getCityName().then((value)=>{
+      this.cityNameList = value
+      console.log("测试首选项")
+    })
 
-    if(this.cityName!== '')
-    {
-      console.log("测试"+this.cityName)
-    }
-    else
-      console.log("失败")
+    PreferencesUtil.getLocationId().then((value)=>{
+      this.locationIdList = value
+    })
 
 
   }

@@ -4,6 +4,7 @@ import {CitySearch} from '../bean/CitySearch/CitySearch'
 import { ExpectExtend } from '@ohos/hypium'
 import {location} from '../bean/CitySearch/location'
 import { AllComponent } from '../Components/AllComponent'
+import PreferencesUtil from '../Util/PreferenceUtil'
 
 @Entry
 @Component
@@ -62,6 +63,7 @@ struct NewCityPage {
           .onClick(()=>{
             this.locationIdList.push(this.addLocationId)
             this.cityNameList.push(this.addLocationName)
+            PreferencesUtil.saveMessage(this.cityNameList,this.locationIdList)
             router.pushUrl({
               url: 'pages/Index2',
               params:{

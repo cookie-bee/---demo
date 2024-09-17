@@ -85,7 +85,7 @@ export struct NewFutureDailyWeather {
   }
 
   DateChange(dates:string):string{
-    //i 假设的时间字符串
+
     let dateString: string = dates
 
     // 使用Date对象解析时间字符串
@@ -100,120 +100,120 @@ export struct NewFutureDailyWeather {
   }
 
   build(){
-     Column(){
-       Row(){
-         Column(){
-           Text("多日预报")
-             .textAlign(TextAlign.Start)
-             .fontSize(15)
-             .fontColor(Color.White)
-             .opacity(0.5)
-             .width("100%")
-             .margin({top:20,left:30})
+  Column(){
+    Row(){
+      Column(){
+        Text("多日预报")
+          .textAlign(TextAlign.Start)
+          .fontSize(15)
+          .fontColor(Color.White)
+          .opacity(0.5)
+          .width("100%")
+          .margin({top:20,left:30})
 
-           Blank()
+        Blank()
 
-           Scroll(){
-             Canvas(this.context)
-               .width(this.tempMax.length * this.itemWidth + this.itemWidth + this.sideMargin * 2)
-               .height("85%")
-               .onReady(()=>{
-                 //找出高温曲线的最大值和低温曲线的最小值
-                 const maxTemp: number = Math.max(...this.tempMax)
-                 const minTemp: number = Math.max(...this.tempMin)
-                 //每改变一度，曲线变化幅度
-                 const step: number = this.canvasHeight*0.4/(maxTemp - minTemp)
-                 const curveChartMargin: number = this.canvasHeight * 0.09
+        Scroll(){
+          Canvas(this.context)
+            .width(this.tempMax.length * this.itemWidth + this.itemWidth + this.sideMargin * 2)
+            .height("85%")
+            .onReady(()=>{
+              //找出高温曲线的最大值和低温曲线的最小值
+              const maxTemp: number = Math.max(...this.tempMax)
+              const minTemp: number = Math.max(...this.tempMin)
+              //每改变一度，曲线变化幅度
+              const step: number = this.canvasHeight*0.4/(maxTemp - minTemp)
+              const curveChartMargin: number = this.canvasHeight * 0.09
 
-                 //设置线条配置
-                 this.context.lineWidth = 2
-                 this.context.font = '13vp sans-serif'
-                 this.context.fillStyle = 'rgba(255,255,255,0.6)'
-                 this.context.strokeStyle = 'rgba(255,255,255,0.5)'
-                 this.context.textAlign = 'start'
+              //设置线条配置
+              this.context.lineWidth = 2
+              this.context.font = '13vp sans-serif'
+              this.context.fillStyle = 'rgba(255,255,255,0.6)'
+              this.context.strokeStyle = 'rgba(255,255,255,0.5)'
+              this.context.textAlign = 'start'
 
-                 //设置x坐标
-                 let xPos: number[] = []
-                 let tempMaxPos: number[] = []
-                 let tempMinPos: number[] = []
+              //设置x坐标
+              let xPos: number[] = []
+              let tempMaxPos: number[] = []
+              let tempMinPos: number[] = []
 
-                 for(let i: number = 0;i<this.tempMax.length;i++){
-                   //确定高低温温度点的坐标
-                   let x: number = this.sideMargin + (i * this.itemWidth)
-                   let yHeight: number = this.canvasHeight - (curveChartMargin + (this.tempMax [i] - minTemp) * step)+20
-                   let yLow: number = this.canvasHeight - (curveChartMargin + (this.tempMin[i] - minTemp) * step)
+              for(let i: number = 0;i<this.tempMax.length;i++){
+                //确定高低温温度点的坐标
+                let x: number = this.sideMargin + (i * this.itemWidth)
+                let yHeight: number = this.canvasHeight - (curveChartMargin + (this.tempMax [i] - minTemp) * step)+20
+                let yLow: number = this.canvasHeight - (curveChartMargin + (this.tempMin[i] - minTemp) * step)
 
-                   //存放数据
-                   xPos.push(x)
-                   tempMaxPos.push(yHeight)
-                   tempMinPos.push(yLow)
+                //存放数据
+                xPos.push(x)
+                tempMaxPos.push(yHeight)
+                tempMinPos.push(yLow)
 
-                   //画出每个结点
-                   this.context.fillStyle = "white"
-                   let region: Path2D = new Path2D()
-                   region.ellipse(x, yHeight, 4, 4, 0, 0, Math.PI * 2)
-                   region.ellipse(x, yLow, 4, 4, 0, 0, Math.PI * 2)
-                   this.context.fill(region)
+                //画出每个结点
+                this.context.fillStyle = "white"
+                let region: Path2D = new Path2D()
+                region.ellipse(x, yHeight, 4, 4, 0, 0, Math.PI * 2)
+                region.ellipse(x, yLow, 4, 4, 0, 0, Math.PI * 2)
+                this.context.fill(region)
 
-                   //绘制日期
-                   this.context.fillStyle = "rgba(255,255,255,0.6)"
-                   this.context.font = '60px Arial'
-                   let dateStr: string = this.weatherDates[i]
-                   this.context.fillText(dateStr,x - this.context.measureText(dateStr).width / 2,15)
+                //绘制日期
+                this.context.fillStyle = "rgba(255,255,255,0.6)"
+                this.context.font = '60px Arial'
+                let dateStr: string = this.weatherDates[i]
+                this.context.fillText(dateStr,x - this.context.measureText(dateStr).width / 2,15)
 
-                   //绘制天气图标
-                   let iconUrl: string = this.weatherUrl(this.weatherConditions[i])
-                   let imgIcon = new ImageBitmap(iconUrl)
-                   this.context.drawImage(imgIcon, x - this.context.measureText(dateStr).width/2+10,30,30,35)
+                //绘制天气图标
+                let iconUrl: string = this.weatherUrl(this.weatherConditions[i])
+                let imgIcon = new ImageBitmap(iconUrl)
+                this.context.drawImage(imgIcon, x - this.context.measureText(dateStr).width/2+10,30,30,35)
 
-                   //绘制天气状态
-                   this.context.fillStyle = "white"
-                   this.context.font = '55px Arial'
-                   let highConditionStr: string = this.weatherConditions[i]
-                   this.context.fillText(highConditionStr, x-this.context.measureText(highConditionStr).width/2,90)
+                //绘制天气状态
+                this.context.fillStyle = "white"
+                this.context.font = '55px Arial'
+                let highConditionStr: string = this.weatherConditions[i]
+                this.context.fillText(highConditionStr, x-this.context.measureText(highConditionStr).width/2,90)
 
-                   //绘制高温低温的文字
-                   this.context.fillStyle = "white"
-                   this.context.font = '55px Arial'
-                   let maxTemperatureStr: string = `${this.tempMax[i]}℃`
-                   let minTemperatureStr: string = `${this.tempMin[i]}℃`
-                   this.context.fillText(maxTemperatureStr, x-this.context.measureText(maxTemperatureStr).width/2,yHeight-8)
-                   this.context.fillText(minTemperatureStr, x-this.context.measureText(minTemperatureStr).width/2,yLow+25)
+                //绘制高温低温的文字
+                this.context.fillStyle = "white"
+                this.context.font = '55px Arial'
+                let maxTemperatureStr: string = `${this.tempMax[i]}℃`
+                let minTemperatureStr: string = `${this.tempMin[i]}℃`
+                this.context.fillText(maxTemperatureStr, x-this.context.measureText(maxTemperatureStr).width/2,yHeight-8)
+                this.context.fillText(minTemperatureStr, x-this.context.measureText(minTemperatureStr).width/2,yLow+25)
 
-                 }
+              }
 
-                 //绘制高温曲线
-                 this.context.fillStyle = "rgba(255,255,255,0.5)"
-                 this.context.beginPath()
-                 this.context.moveTo(xPos[0],tempMaxPos[0])
-                 for(let i: number=1;i<xPos.length;i++){
-                   let x0: number = xPos[i-1]
-                   let y0: number = tempMaxPos[i-1]
-                   //绘制一条三次贝塞尔曲线
-                   this.context.bezierCurveTo(x0+(xPos[i]-x0)*0.3,y0,xPos[i]-(xPos[i]-x0)*0.3,tempMaxPos[i],xPos[i],tempMaxPos[i])
-                 }
-                 this.context.stroke()    //调用stroke方法来实际绘制出路径
+              //绘制高温曲线
+              this.context.fillStyle = "rgba(255,255,255,0.5)"
+              this.context.beginPath()
+              this.context.moveTo(xPos[0],tempMaxPos[0])
+              for(let i: number=1;i<xPos.length;i++){
+                let x0: number = xPos[i-1]
+                let y0: number = tempMaxPos[i-1]
+                //绘制一条三次贝塞尔曲线
+                this.context.bezierCurveTo(x0+(xPos[i]-x0)*0.3,y0,xPos[i]-(xPos[i]-x0)*0.3,tempMaxPos[i],xPos[i],tempMaxPos[i])
+              }
+              this.context.stroke()    //调用stroke方法来实际绘制出路径
 
-                 //绘制低温曲线
-                 this.context.beginPath()
-                 this.context.moveTo(xPos[0],tempMinPos[0])
-                 for(let i: number=1;i<xPos.length;i++){
-                   let x0: number = xPos[i-1]
-                   let y0: number = tempMinPos[i-1]
-                   this.context.bezierCurveTo(x0+(xPos[i]-x0)*0.3,y0,xPos[i]-(xPos[i]-x0)*0.3,tempMinPos[i] ,xPos[i],tempMinPos[i])
-                 }
-                 this.context.stroke()
-               })
-           }
-           .scrollable(ScrollDirection.Horizontal)
-           .scrollBar(BarState.Off)
-         }
-         .width("95%")
-         .height("50%")
-         .backgroundColor('rgba(255, 255, 255, 0.1)')
-         .borderRadius(20)
-         .margin({top:20})
-       }
-     }
+              //绘制低温曲线
+              this.context.beginPath()
+              this.context.moveTo(xPos[0],tempMinPos[0])
+              for(let i: number=1;i<xPos.length;i++){
+                let x0: number = xPos[i-1]
+                let y0: number = tempMinPos[i-1]
+                this.context.bezierCurveTo(x0+(xPos[i]-x0)*0.3,y0,xPos[i]-(xPos[i]-x0)*0.3,tempMinPos[i] ,xPos[i],tempMinPos[i])
+              }
+              this.context.stroke()
+            })
+        }
+        .scrollable(ScrollDirection.Horizontal)
+        .scrollBar(BarState.Off)
+      }
+      .width("95%")
+      .height("50%")
+      .backgroundColor('rgba(255, 255, 255, 0.1)')
+      .borderRadius(20)
+      .margin({top:20})
+    }
   }
+}
 }

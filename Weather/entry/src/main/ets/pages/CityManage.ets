@@ -2,7 +2,7 @@ import {router} from '@kit.ArkUI'
 import {CityBlock} from '../Components/CityManageComponent/CityBlock'
 import {CitySearch} from '../bean/CitySearch/CitySearch'
 import getweatherUtil from '../Util/getWeatherUtil'
-
+import PreferencesUtil from '../Util/PreferenceUtil'
 
 @Entry
 @Component
@@ -67,6 +67,8 @@ struct CityManage {
                          this.cityNameList = this.cityNameList.filter(item => item !== this.cityNameList[index])
 
                         this.locationIdList = this.locationIdList.filter(item => item !== this.locationIdList[index])
+
+                        PreferencesUtil.saveMessage(this.cityNameList,this.locationIdList)
 
                       }
                     }

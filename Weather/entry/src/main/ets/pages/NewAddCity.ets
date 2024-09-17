@@ -4,6 +4,7 @@ import {CitySearch} from '../bean/CitySearch/CitySearch'
 import { ExpectExtend } from '@ohos/hypium'
 import {location} from '../bean/CitySearch/location'
 import {HotCityComponent} from '../Components/HotCityComponent'
+import PreferencesUtil from '../Util/PreferenceUtil'
 
 @Entry
 @Component
@@ -20,6 +21,8 @@ struct NewAddCity {
   @State SearchText: string = ''
 
   @State CityMessage: Array<location> = []
+
+  @State timer: number | null = null  //计时器
 
 
   onPageShow(): void
@@ -55,10 +58,18 @@ struct NewAddCity {
               .width(20)
             TextInput({ placeholder: "搜索城市（中文/拼音）" })
               .onChange(async (value) => {
-                this.SearchText = value
+                if(this.timer!==null){
+                  clearTimeout(this.timer)
+                }
+                //设置一个新的定时器
+                this.timer = setTimeout(async ()=>{
+                  this.SearchText = value
+                  let result: CitySearch = await getweatherUtil.getCityMessage_id_1(value);
+                  this.CityMessage = result.location; // 更新城市信息
+                  //定时器完成后将其清空
+                  this.timer = null
+                },800)
 
-                let result: CitySearch = await getweatherUtil.getCityMessage_id_1(value);
-                this.CityMessage = result.location; // 更新城市信息
 
               })
               .backgroundColor("rgba(255,255,255,0.5)")
